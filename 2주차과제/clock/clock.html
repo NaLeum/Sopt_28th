@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="kr">
+	<head>
+	<meta charset="UTF-8">
+	<title>clock</title>
+
+<style rel="stylesheet">
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    }
+.js-weather{
+    position: absolute;
+    color: rgba(00, 255, 255, 1);
+    top: 30px;
+    right: 30px;
+    font-weight: 600;
+    box-shadow: 0 0 50px rgba(00, 255, 255, 1);
+    background-color: rgba(00, 255, 255, .23);
+}
+</style>
+<script src='./clock.js' defer ></script>
+<script src="./wheater.js" defer></script>
+</head>
+<body>
+<div class="js-weather"></div>
+<canvas id="canvas" width="500" height="500" ></canvas>
+
+
+</body>
+</html>
