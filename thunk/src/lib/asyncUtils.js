@@ -21,6 +21,32 @@ export const createPromiseThunk = (type,promomisCreator) => {
     return thunkCreator;
 }
 
+export const handleAsyncActions = (type,key, keepData) => {
+    const [SUCCESS,ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+    const reducer = (state, action) => {
+        switch (action.type){
+            case type:
+                return{
+                    ...state,
+                    [key]: reducerUtils.loading(keepData ? state[key].data : null)
+                }
+            case SUCCESS:
+               return {
+                   ...state,
+                   [key]:reducerUtils.success(action.payload)
+                }
+            case ERROR:
+                return{
+                    ...state,
+                    [key]:reducerUtils.error(action.payload)
+                }
+            default:
+                return state;
+        }
+    }
+    return reducer;
+}
+
 export const reducerUtils = {
     initial : (data=null) => ({
         loading: false,
@@ -44,30 +70,4 @@ export const reducerUtils = {
         loading:false,
         error
     })
-}
-
-export const handleAsyncActions = (type,key) => {
-    const [SUCCESS,ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
-    const reducer = (state, action) => {
-        switch (action.type){
-            case type:
-                return{
-                    ...state,
-                    [key]: reducerUtils.loading()
-                }
-            case SUCCESS:
-               return { 
-                   ...state,
-                   [key]:reducerUtils.success(action.payload)
-                }
-            case ERROR:
-                return{
-                    ...state,
-                    [key]:reducerUtils.error(action.payload)
-                }
-            default:
-                return state;
-        }
-    }
-    return reducer;
 }

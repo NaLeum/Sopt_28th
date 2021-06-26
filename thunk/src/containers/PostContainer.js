@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Post from "../components/Post"
-import { getPost } from "../modules/posts";
+import { clearPost, getPost } from "../modules/posts";
 
 
 const PostContainer = ({postId}) => {
@@ -10,6 +10,9 @@ const PostContainer = ({postId}) => {
 
     useEffect(()=> {
         dispatch(getPost(postId));
+        return () => {
+            dispatch(clearPost());
+        }
     },[postId,dispatch])
 
     if(loading) return <div>로딩중...</div>
