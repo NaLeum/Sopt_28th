@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { withRouter } from "react-router";
 import "../App.css";
-import { loginAPI,getUserAPI } from "../lib/api";
+import { loginAPI } from "../lib/api";
 
 const Login = ({history}) => {
 
@@ -18,14 +18,14 @@ const Login = ({history}) => {
         e.preventDefault();
         try {
             const result = await loginAPI(formData);
-            console.log(result)
+            // console.log(result)
 
             if(result.loginSuccess){
-                window.localStorage.setItem('token', result.token)
-                const result2= await getUserAPI( result.token);
-                console.log(result2)
+                window.localStorage.setItem('token',result.token)
+                // const result2= await getUserAPI(result.token);
+                // console.log(result2);
 
-                // history.push("/success");
+                history.push("/success");
             }         
         } catch (e) {
             console.log(e)

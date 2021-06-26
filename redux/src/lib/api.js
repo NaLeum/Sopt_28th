@@ -15,15 +15,3 @@ export const loginAPI= async (dataToSubmit) => {
         console.error('[FAIL] POST LOGIN',e);
     }
 };
-
-export const getUserAPI= async (token) => {
-    // window.cookies
-    try{
-        const {data} = await client.get("/auth",{headers:{"token":token}});
-        console.log(token)
-        console.log('[SUCCESS] GET AUTH',data);
-        return data;
-    }catch(e){
-        console.error('[FAIL] GET AUTH',e);
-    }
-};
