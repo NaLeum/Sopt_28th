@@ -1,7 +1,7 @@
 export const createPromiseThunk = (type,promomisCreator) => {
     const [SUCCESS,ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
 
-    const thunkCreator = param = async dispatch => {
+    const thunkCreator = param => async dispatch => {
         dispatch({type})
         try{
             const payload = await promomisCreator(param);
