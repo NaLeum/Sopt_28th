@@ -6,10 +6,14 @@ import reportWebVitals from './reportWebVitals';
 
 // 6. 리덕스 적용
 import {Provider} from "react-redux";
-import {createStore} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
 import rootReducer from './modules';
+// 11. redux-logger 설치
+import logger from 'redux-logger';
 
-const store = createStore(rootReducer);
+// 12. redux-devtools-extension 적용
+import {composeWithDevTools} from 'redux-devtools-extension';
+const store = createStore(rootReducer, composeWithDevTools( applyMiddleware(logger)));
 
 
 ReactDOM.render(
