@@ -1,4 +1,5 @@
 import * as postsAPI from  '../api/posts';
+import { reducerUtils } from '../lib/asyncUtils';
 
 const GET_POSTS = 'GET_POSTS';
 const GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS';
@@ -47,19 +48,11 @@ export const getPost = id => async dispatch => {
             error:e
         })
     }   
-}
+} 
 
 const initialState = {
-    posts:{
-        loading: false,
-        data: null,
-        error: null,
-    },
-    post:{
-        loading: false,
-        data: null,
-        error: null,
-    }
+    posts:reducerUtils.initial(),
+    post: reducerUtils.initial()
 }
 
 export default function posts(state=initialState, action){
@@ -67,56 +60,32 @@ export default function posts(state=initialState, action){
         case GET_POSTS:
             return{
                 ...state,
-                posts:{
-                    loading: true,
-                    data: null,
-                    error: null
-                }
+                posts: reducerUtils.loading()
             }
         case GET_POSTS_SUCCESS:
             return{
                 ...state,
-                posts:{
-                    loading: false,
-                    data: action.posts,
-                    error:null
-                }
+                posts:reducerUtils.success(action.posts)
             }
         case GET_POSTS_ERROR:
             return{
                 ...state,
-                posts:{
-                    loading: false,
-                    data: null,
-                    error: action.error,
-                }
+                posts:reducerUtils.error(action.error)
             }
         case GET_POST:
             return{
                 ...state,
-                post:{
-                    loading: true,
-                    data: null,
-                    error: null
-                }
+                post:reducerUtils.loading()
             }
         case GET_POST_SUCCESS:
             return{
                 ...state,
-                post:{
-                    loading: false,
-                    data: action.posts,
-                    error:null
-                }
+                post:reducerUtils.success(action.post)
             }
         case GET_POST_ERROR:
             return{
                 ...state,
-                post:{
-                    loading: false,
-                    data: null,
-                    error: action.error,
-                }
+                post:reducerUtils.error(action.error)
             }
         default:
         return state;
