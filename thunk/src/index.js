@@ -13,7 +13,11 @@ import logger from 'redux-logger';
 
 // 12. redux-devtools-extension 적용
 import {composeWithDevTools} from 'redux-devtools-extension';
-const store = createStore(rootReducer, composeWithDevTools( applyMiddleware(logger)));
+
+// 13. redux-thunk 
+import ReduxThunk from 'redux-thunk';
+
+const store = createStore(rootReducer, composeWithDevTools( applyMiddleware(ReduxThunk,logger)));
 
 
 ReactDOM.render(

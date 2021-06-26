@@ -6,6 +6,19 @@ const DECREASE = "DECREASE";
 export const increase = () => ({type:INCREASE});
 export const decrease = () => ({type:DECREASE});
 
+// 14. thunk 함수 생성
+export const increaseAsync = () => (dispath) => {
+    setTimeout(()=>{
+        dispath(increase());
+    },1000)
+}
+
+export const decreaseAsync = () => (dispath) => {
+    setTimeout(()=>{
+        dispath(decrease());
+    },1000)
+}
+
 // 3. 초기 상태 설정 (꼭 객체이거나 배열일 필요는 없다)
 const initialState = 0;
 
