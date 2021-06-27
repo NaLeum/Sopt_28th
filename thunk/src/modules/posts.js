@@ -12,7 +12,7 @@ const GET_POST_ERROR = 'GET_POST_ERROR';
 
 const CLEAR_POST = "CLEAR_POST";
 
-export const getPosts = createPromiseThunk(GET_POSTS, postsAPI.getPosts,true);
+export const getPosts = createPromiseThunk(GET_POSTS, postsAPI.getPosts);
 export const getPost = createPromiseThunk(GET_POST, postsAPI.getPostById);
 export const clearPost = () => ({type:CLEAR_POST});
 
@@ -21,7 +21,7 @@ const initialState = {
     post: reducerUtils.initial()
 }
 
-const getPostsReducer = handleAsyncActions(GET_POSTS,"posts");
+const getPostsReducer = handleAsyncActions(GET_POSTS,"posts",true);
 const getPostReducer = handleAsyncActions(GET_POST,"post");
 
 export default function posts(state=initialState, action){
