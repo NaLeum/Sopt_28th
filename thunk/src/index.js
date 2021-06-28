@@ -16,15 +16,21 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 
 // 13. redux-thunk 
 import ReduxThunk from 'redux-thunk';
-import {BrowserRouter as Router} from 'react-router-dom';
+import {Router} from 'react-router-dom';
+import {createBrowserHistory} from 'history';
 
+const customHistory = createBrowserHistory();
 
-const store = createStore(rootReducer, composeWithDevTools( applyMiddleware(ReduxThunk,logger)));
+const store = createStore(rootReducer, 
+  composeWithDevTools( 
+    applyMiddleware(ReduxThunk.withExtraArgument({history:customHistory}),
+      logger
+      )));
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
+    <Router history={customHistory}>
       <Provider store={store}>
         <App />
       </Provider>
